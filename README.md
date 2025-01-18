@@ -10,7 +10,7 @@ CPU/GPU使用率、メモリ使用率などのリソース情報をシリアル�
 |Stop Bits|1|
 |Parity Bits|0|
 |Loopback|none|
-|New Line Code|`CR` or `LF`|
+|New Line Code|`CR` or `LF` or `CRLF`|
 
 ## Type Definition
 
@@ -18,7 +18,7 @@ CPU/GPU使用率、メモリ使用率などのリソース情報をシリアル�
 |:--:|:--|:--|
 |i32|32bit signed integer|`-?(0\|[1-9][0-9]*)`<br>`0x[0-9a-fA-F]+`|
 |f32|32bit floating point|`-?(0\|[1-9][0-9]*(\.[0-9]+)?([eE][0-9]+)?)`|
-|str|string (max 63 Bytes)|ASCII characters only<br>If it contains spaces, enclose it in `"..."`|
+|str|string (max 63 Bytes)|Printable ASCII characters only<br>should be enclosed it in `"..."`<br>`\"`-->`"`, `\r`-->`CR`, `\n`-->`LF`, `\t`-->Tab|
 
 ## Metric Class Definition
 
@@ -29,6 +29,10 @@ CPU/GPU使用率、メモリ使用率などのリソース情報をシリアル�
 |2|Physical Memory Usage|
 
 ## Command/Response Format
+
+空行は無視すること。
+
+送信側は改行文字に `CRLF` を使用できるが、受信側は 1 個の `CR` または `LF` を改行として扱ってよい。この場合 `CRLF` は行末の後に空行が存在するように見える。
 
 ### Command (Host --> Device)
 
@@ -51,7 +55,7 @@ CPU/GPU使用率、メモリ使用率などのリソース情報をシリアル�
 
   |Value|Type|Description|
   |:--:|:--:|:--|
-  |`perf2serial_welcome`|str|indicates connection established|
+  |`"perf2serial_welcome"`|str|indicates connection established|
 
 ### device_name
 
