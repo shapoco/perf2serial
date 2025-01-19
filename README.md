@@ -1,6 +1,6 @@
 # perf2serial
 
-CPU/GPU使用率、メモリ使用率などのリソース情報をシリアルインタフェースを通じて外部の DIY デバイスに表示するためのプロトコル。
+CPU/GPU使用率、メモリ使用率などのリソース情報をシリアルインタフェースを通じて外部の DIY デバイスに表示するためのプロトコルです。
 
 ## Serial Setting
 
@@ -9,8 +9,9 @@ CPU/GPU使用率、メモリ使用率などのリソース情報をシリアル�
 |Baudrate|115200 bps|
 |Stop Bits|1|
 |Parity Bits|0|
-|Loopback|none|
-|New Line Code|`CR` or `LF` or `CRLF`|
+|Return Code|`CR` or `LF` or `CRLF`|
+
+Devices do not loop back.
 
 ## Type Definition
 
